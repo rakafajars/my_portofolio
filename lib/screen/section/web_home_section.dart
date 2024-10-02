@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_portofolio/constant/color_const.dart';
 import 'package:my_portofolio/constant/gradient_filled_button_const.dart';
 import 'package:my_portofolio/constant/gradient_text_const.dart';
+import 'package:my_portofolio/gen/assets.gen.dart';
 import 'package:my_portofolio/theme/font_style_theme.dart';
 
 class WebHomeSection extends StatelessWidget {
@@ -42,8 +43,8 @@ class WebHomeSection extends StatelessWidget {
             ),
             CircleAvatar(
               radius: 100,
-              child: Image.network(
-                'https://via.placeholder.com/150',
+              backgroundImage: AssetImage(
+                MyAssets.images.avatar.path,
               ),
             ),
           ],

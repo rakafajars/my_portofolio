@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_portofolio/constant/color_const.dart';
 import 'package:my_portofolio/constant/nav_item_const.dart';
 import 'package:my_portofolio/screen/component/section_home_component.dart';
+import 'package:my_portofolio/screen/component/section_skill_component.dart';
 import 'package:my_portofolio/widget/responsive_navigation_widget.dart';
 
 class PortofolioScreen extends StatefulWidget {
@@ -47,12 +48,18 @@ class _PortofolioScreenState extends State<PortofolioScreen> {
             )
           : null,
       body: ListView(
-        padding: EdgeInsets.symmetric(
+        padding: const EdgeInsets.symmetric(
           vertical: 16,
-          horizontal: MediaQuery.of(context).size.width <= 600 ? 0 : 120,
         ),
-        children: const [
-          SectionHomeComponent(),
+        children: [
+          Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: MediaQuery.of(context).size.width <= 600 ? 0 : 120,
+            ),
+            child: const SectionHomeComponent(),
+          ),
+          const SizedBox(height: 24),
+          const SectionSkillComponent(),
         ],
       ),
     );
