@@ -27,16 +27,35 @@ class $AssetsImagesGen {
   /// File path: assets/images/flutter.svg
   SvgGenImage get flutter => const SvgGenImage('assets/images/flutter.svg');
 
+  /// File path: assets/images/github.png
+  AssetGenImage get github => const AssetGenImage('assets/images/github.png');
+
+  /// File path: assets/images/gmail.png
+  AssetGenImage get gmail => const AssetGenImage('assets/images/gmail.png');
+
   /// File path: assets/images/javascript.svg
   SvgGenImage get javascript =>
       const SvgGenImage('assets/images/javascript.svg');
+
+  /// File path: assets/images/linkedin.png
+  AssetGenImage get linkedin =>
+      const AssetGenImage('assets/images/linkedin.png');
 
   /// File path: assets/images/react.svg
   SvgGenImage get react => const SvgGenImage('assets/images/react.svg');
 
   /// List of all assets
-  List<dynamic> get values =>
-      [avatar, dart, firebase, flutter, javascript, react];
+  List<dynamic> get values => [
+        avatar,
+        dart,
+        firebase,
+        flutter,
+        github,
+        gmail,
+        javascript,
+        linkedin,
+        react
+      ];
 }
 
 class MyAssets {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_portofolio/constant/color_const.dart';
 import 'package:my_portofolio/constant/nav_item_const.dart';
+import 'package:my_portofolio/screen/component/section_footer_component.dart';
 import 'package:my_portofolio/screen/component/section_home_component.dart';
 import 'package:my_portofolio/screen/component/section_skill_component.dart';
 import 'package:my_portofolio/widget/responsive_navigation_widget.dart';
@@ -48,8 +49,8 @@ class _PortofolioScreenState extends State<PortofolioScreen> {
             )
           : null,
       body: ListView(
-        padding: const EdgeInsets.symmetric(
-          vertical: 16,
+        padding: const EdgeInsets.only(
+          top: 16,
         ),
         children: [
           Padding(
@@ -60,6 +61,8 @@ class _PortofolioScreenState extends State<PortofolioScreen> {
           ),
           const SizedBox(height: 24),
           const SectionSkillComponent(),
+          const SizedBox(height: 24),
+          const SectionFooterComponent(),
         ],
       ),
     );
