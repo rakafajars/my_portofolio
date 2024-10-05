@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_portofolio/constant/color_const.dart';
 import 'package:my_portofolio/constant/nav_item_const.dart';
+import 'package:my_portofolio/screen/component/section_education_component.dart';
 import 'package:my_portofolio/screen/component/section_footer_component.dart';
 import 'package:my_portofolio/screen/component/section_home_component.dart';
 import 'package:my_portofolio/screen/component/section_skill_component.dart';
@@ -61,6 +62,8 @@ class _PortofolioScreenState extends State<PortofolioScreen> {
           ),
           const SizedBox(height: 24),
           const SectionSkillComponent(),
+          const SizedBox(height: 24),
+          const SectionEducationComponent(),
           const SizedBox(height: 24),
           const SectionFooterComponent(),
         ],

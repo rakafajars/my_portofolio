@@ -41,6 +41,10 @@ class $AssetsImagesGen {
   AssetGenImage get linkedin =>
       const AssetGenImage('assets/images/linkedin.png');
 
+  /// File path: assets/images/logo_uin.jpg
+  AssetGenImage get logoUin =>
+      const AssetGenImage('assets/images/logo_uin.jpg');
+
   /// File path: assets/images/react.svg
   SvgGenImage get react => const SvgGenImage('assets/images/react.svg');
 
@@ -54,6 +58,7 @@ class $AssetsImagesGen {
         gmail,
         javascript,
         linkedin,
+        logoUin,
         react
       ];
 }
