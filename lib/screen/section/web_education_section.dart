@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_portofolio/constant/color_const.dart';
 import 'package:my_portofolio/gen/assets.gen.dart';
 import 'package:my_portofolio/theme/font_style_theme.dart';
 
@@ -7,18 +8,25 @@ class WebEducationSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Text(
-          'Education',
-          style: FontStyleTheme.headingStyle.copyWith(
-            color: Colors.white,
+    return Container(
+      width: double.infinity,
+      color: ColorConst.black1,
+      padding: const EdgeInsets.symmetric(
+        vertical: 16,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+            'Education',
+            style: FontStyleTheme.headingStyle.copyWith(
+              color: Colors.white,
+            ),
           ),
-        ),
-        const SizedBox(height: 32),
-        const WebEducationItemSection(),
-      ],
+          const SizedBox(height: 32),
+          const WebEducationItemSection(),
+        ],
+      ),
     );
   }
 }

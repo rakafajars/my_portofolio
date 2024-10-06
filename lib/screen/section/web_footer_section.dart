@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:my_portofolio/constant/color_const.dart';
 import 'package:my_portofolio/model/contact_model.dart';
 import 'package:my_portofolio/theme/font_style_theme.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -32,7 +31,6 @@ class WebFooterSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      color: ColorConst.black1,
       padding: const EdgeInsets.symmetric(
         vertical: 16,
         horizontal: 100,

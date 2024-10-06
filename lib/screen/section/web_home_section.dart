@@ -72,6 +72,7 @@ class WebHomeSection extends StatelessWidget {
           onPressed: () {},
           text: 'Download CV',
         ),
+        const SizedBox(height: 16),
       ],
     );
   }
