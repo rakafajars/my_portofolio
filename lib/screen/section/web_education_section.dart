@@ -23,7 +23,7 @@ class WebEducationSection extends StatelessWidget {
               color: Colors.white,
             ),
           ),
-          const SizedBox(height: 32),
+          const SizedBox(height: 12),
           const WebEducationItemSection(),
         ],
       ),

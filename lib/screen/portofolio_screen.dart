@@ -5,6 +5,7 @@ import 'package:my_portofolio/screen/component/section_education_component.dart'
 import 'package:my_portofolio/screen/component/section_experience_component.dart';
 import 'package:my_portofolio/screen/component/section_footer_component.dart';
 import 'package:my_portofolio/screen/component/section_home_component.dart';
+import 'package:my_portofolio/screen/component/section_sertification_component.dart';
 import 'package:my_portofolio/screen/component/section_skill_component.dart';
 import 'package:my_portofolio/widget/responsive_navigation_widget.dart';
 
@@ -64,6 +65,7 @@ class _PortofolioScreenState extends State<PortofolioScreen> {
           const SectionSkillComponent(),
           const SectionExperienceComponent(),
           const SectionEducationComponent(),
+          const SectionSertificationComponent(),
           const SectionFooterComponent(),
         ],
       ),

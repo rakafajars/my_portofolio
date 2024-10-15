@@ -21,7 +21,7 @@ class WebExperienceSection extends StatelessWidget {
               color: Colors.white,
             ),
           ),
-          const SizedBox(height: 32),
+          const SizedBox(height: 12),
           Card(
             margin: const EdgeInsets.only(
               bottom: 20,
