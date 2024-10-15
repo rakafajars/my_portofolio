@@ -5,10 +5,12 @@ import 'package:my_portofolio/widget/web_header_widget.dart';
 
 class ResponsiveNavigationWidget extends StatelessWidget {
   final List<NavItem> items;
+  final NavItem currentItem;
 
   const ResponsiveNavigationWidget({
     super.key,
     required this.items,
+    required this.currentItem,
   });
 
   @override
@@ -20,6 +22,7 @@ class ResponsiveNavigationWidget extends StatelessWidget {
           return WebHeaderWidget(
             title: title,
             items: items,
+            currentItem: currentItem,
           );
         } else {
           return const MobileHeaderWidget(

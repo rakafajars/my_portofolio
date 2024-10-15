@@ -17,24 +17,49 @@ class PortofolioScreen extends StatefulWidget {
 }
 
 class _PortofolioScreenState extends State<PortofolioScreen> {
-  List<NavItem> navItems = [
-    NavItem(
-      title: 'Home',
-      onTap: () {},
-    ),
-    NavItem(
-      title: 'Projects',
-      onTap: () {},
-    ),
-    NavItem(
-      title: 'About',
-      onTap: () {},
-    ),
-    NavItem(
-      title: 'Contact',
-      onTap: () {},
-    ),
-  ];
+  int _activeIndex = 0;
+  late List<NavItem> navItems;
+
+  void _initializeNavItems() {
+    navItems = [
+      NavItem(
+        title: 'Home',
+        onTap: () => selectedIndex(0),
+        isActive: _activeIndex == 0,
+      ),
+      NavItem(
+        title: 'Experience',
+        onTap: () => selectedIndex(1),
+        isActive: _activeIndex == 1,
+      ),
+      NavItem(
+        title: 'Projects',
+        onTap: () {},
+        isActive: _activeIndex == 2,
+      ),
+      NavItem(
+        title: 'About',
+        onTap: () {},
+        isActive: _activeIndex == 3,
+      ),
+      NavItem(
+        title: 'Contact',
+        onTap: () {},
+        isActive: _activeIndex == 4,
+      ),
+    ];
+  }
+
+  void selectedIndex(int index) {
+    _activeIndex = index;
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _initializeNavItems();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,11 +69,13 @@ class _PortofolioScreenState extends State<PortofolioScreen> {
         preferredSize: const Size.fromHeight(kToolbarHeight),
         child: ResponsiveNavigationWidget(
           items: navItems,
+          currentItem: navItems[_activeIndex],
         ),
       ),
       drawer: MediaQuery.of(context).size.width <= 600
           ? ResponsiveNavigationWidget(
               items: navItems,
+              currentItem: navItems[_activeIndex],
             )
           : null,
       body: ListView(
@@ -56,16 +83,20 @@ class _PortofolioScreenState extends State<PortofolioScreen> {
           top: 16,
         ),
         children: [
-          Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: MediaQuery.of(context).size.width <= 600 ? 0 : 120,
+          if (_activeIndex == 0) ...[
+            Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: MediaQuery.of(context).size.width <= 600 ? 0 : 120,
+              ),
+              child: const SectionHomeComponent(),
             ),
-            child: const SectionHomeComponent(),
-          ),
-          const SectionSkillComponent(),
-          const SectionExperienceComponent(),
-          const SectionEducationComponent(),
-          const SectionSertificationComponent(),
+            const SectionSkillComponent(),
+          ] else if (_activeIndex == 1) ...[
+            const SectionExperienceComponent(),
+          ],
+          // const SectionExperienceComponent(),
+          // const SectionEducationComponent(),
+          // const SectionSertificationComponent(),
           const SectionFooterComponent(),
         ],
       ),
