@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_portofolio/constant/color_const.dart';
 import 'package:my_portofolio/constant/nav_item_const.dart';
-import 'package:my_portofolio/screen/component/section_education_component.dart';
 import 'package:my_portofolio/screen/component/section_experience_component.dart';
 import 'package:my_portofolio/screen/component/section_footer_component.dart';
 import 'package:my_portofolio/screen/component/section_home_component.dart';
@@ -33,8 +32,8 @@ class _PortofolioScreenState extends State<PortofolioScreen> {
         isActive: _activeIndex == 1,
       ),
       NavItem(
-        title: 'Projects',
-        onTap: () {},
+        title: 'Sertification',
+        onTap: () => selectedIndex(2),
         isActive: _activeIndex == 2,
       ),
       NavItem(
@@ -93,8 +92,9 @@ class _PortofolioScreenState extends State<PortofolioScreen> {
             const SectionSkillComponent(),
           ] else if (_activeIndex == 1) ...[
             const SectionExperienceComponent(),
+          ] else if (_activeIndex == 2) ...[
+            const SectionSertificationComponent(),
           ],
-          // const SectionExperienceComponent(),
           // const SectionEducationComponent(),
           // const SectionSertificationComponent(),
           const SectionFooterComponent(),

@@ -63,10 +63,68 @@ class $AssetsImagesGen {
       ];
 }
 
+class $AssetsSertifikatGen {
+  const $AssetsSertifikatGen();
+
+  /// File path: assets/sertifikat/batch4_page-0001.jpg
+  AssetGenImage get batch4Page0001 =>
+      const AssetGenImage('assets/sertifikat/batch4_page-0001.jpg');
+
+  /// File path: assets/sertifikat/batch5.jpg
+  AssetGenImage get batch5 =>
+      const AssetGenImage('assets/sertifikat/batch5.jpg');
+
+  /// File path: assets/sertifikat/batch6.jpg
+  AssetGenImage get batch6 =>
+      const AssetGenImage('assets/sertifikat/batch6.jpg');
+
+  /// File path: assets/sertifikat/belajar_flutter_pemula_sertifikat_page-0001.jpg
+  AssetGenImage get belajarFlutterPemulaSertifikatPage0001 =>
+      const AssetGenImage(
+          'assets/sertifikat/belajar_flutter_pemula_sertifikat_page-0001.jpg');
+
+  /// File path: assets/sertifikat/belajar_fundamental_flutter_sertifikat_page-0001.jpg
+  AssetGenImage get belajarFundamentalFlutterSertifikatPage0001 =>
+      const AssetGenImage(
+          'assets/sertifikat/belajar_fundamental_flutter_sertifikat_page-0001.jpg');
+
+  /// File path: assets/sertifikat/best_mentor_page-0001.jpg
+  AssetGenImage get bestMentorPage0001 =>
+      const AssetGenImage('assets/sertifikat/best_mentor_page-0001.jpg');
+
+  /// File path: assets/sertifikat/memulai_dengan_pemograman_dart_sertifikat_page-0001.jpg
+  AssetGenImage get memulaiDenganPemogramanDartSertifikatPage0001 =>
+      const AssetGenImage(
+          'assets/sertifikat/memulai_dengan_pemograman_dart_sertifikat_page-0001.jpg');
+
+  /// File path: assets/sertifikat/memulai_dengan_pemograman_swift_page-0001.jpg
+  AssetGenImage get memulaiDenganPemogramanSwiftPage0001 => const AssetGenImage(
+      'assets/sertifikat/memulai_dengan_pemograman_swift_page-0001.jpg');
+
+  /// File path: assets/sertifikat/menjadi_flutter_developer_expert_sertifikat_page-0001.jpg
+  AssetGenImage get menjadiFlutterDeveloperExpertSertifikatPage0001 =>
+      const AssetGenImage(
+          'assets/sertifikat/menjadi_flutter_developer_expert_sertifikat_page-0001.jpg');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [
+        batch4Page0001,
+        batch5,
+        batch6,
+        belajarFlutterPemulaSertifikatPage0001,
+        belajarFundamentalFlutterSertifikatPage0001,
+        bestMentorPage0001,
+        memulaiDenganPemogramanDartSertifikatPage0001,
+        memulaiDenganPemogramanSwiftPage0001,
+        menjadiFlutterDeveloperExpertSertifikatPage0001
+      ];
+}
+
 class MyAssets {
   MyAssets._();
 
   static const $AssetsImagesGen images = $AssetsImagesGen();
+  static const $AssetsSertifikatGen sertifikat = $AssetsSertifikatGen();
 }
 
 class AssetGenImage {

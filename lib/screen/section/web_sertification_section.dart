@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:my_portofolio/theme/font_style_theme.dart';
+import 'package:my_portofolio/constant/color_const.dart';
+import 'package:my_portofolio/model/sertifikat_model.dart';
+import 'package:photo_view/photo_view.dart';
+import 'package:photo_view/photo_view_gallery.dart';
 
 class WebSertificationSection extends StatelessWidget {
   const WebSertificationSection({super.key});
@@ -8,20 +11,22 @@ class WebSertificationSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
+      color: ColorConst.black1,
       padding: const EdgeInsets.symmetric(
         vertical: 16,
+        horizontal: 100,
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
+      child: Wrap(
+        spacing: 32,
+        runSpacing: 32,
+        alignment: WrapAlignment.center,
         children: [
-          Text(
-            'Sertification',
-            style: FontStyleTheme.headingStyle.copyWith(
-              color: Colors.white,
-            ),
-          ),
-          const SizedBox(height: 12),
-          const WebSertifitacionItemSection(),
+          ...sertifikatModels.asMap().entries.map(
+                (entry) => WebSertifitacionItemSection(
+                  sertifikatModel: entry.value,
+                  index: entry.key,
+                ),
+              )
         ],
       ),
     );
@@ -29,7 +34,14 @@ class WebSertificationSection extends StatelessWidget {
 }
 
 class WebSertifitacionItemSection extends StatefulWidget {
-  const WebSertifitacionItemSection({super.key});
+  final SertifikatModel sertifikatModel;
+  final int index;
+
+  const WebSertifitacionItemSection({
+    super.key,
+    required this.sertifikatModel,
+    required this.index,
+  });
 
   @override
   State<WebSertifitacionItemSection> createState() =>
@@ -40,73 +52,98 @@ class _WebSertifitacionItemSectionState
     extends State<WebSertifitacionItemSection> {
   bool _isHovering = false;
 
+  void _showPhotoViewDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          insetPadding: EdgeInsets.zero,
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              PhotoViewGallery.builder(
+                scrollPhysics: const BouncingScrollPhysics(),
+                builder: (BuildContext context, int index) {
+                  return PhotoViewGalleryPageOptions(
+                    imageProvider: AssetImage(sertifikatModels[index].image),
+                    initialScale: PhotoViewComputedScale.contained,
+                    minScale: PhotoViewComputedScale.contained * 0.8,
+                    maxScale: PhotoViewComputedScale.covered * 1.5,
+                    heroAttributes: PhotoViewHeroAttributes(tag: index),
+                  );
+                },
+                itemCount: sertifikatModels.length,
+                loadingBuilder: (context, event) => const Center(
+                  child: CircularProgressIndicator(),
+                ),
+                backgroundDecoration: const BoxDecoration(
+                  color: Colors.black,
+                ),
+                pageController: PageController(initialPage: widget.index),
+              ),
+              Positioned(
+                top: 10,
+                right: 10,
+                child: IconButton(
+                  icon: const Icon(Icons.close, color: Colors.white),
+                  onPressed: () => Navigator.of(context).pop(),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return MouseRegion(
       onEnter: (_) => setState(() => _isHovering = true),
       onExit: (_) => setState(() => _isHovering = false),
-      child: Stack(
-        children: [
-          Container(
-            height: 200,
-            width: 250,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
-                  blurRadius: 10,
-                  spreadRadius: 2,
-                ),
-              ],
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(12),
-              child: Image.network(
-                'https://marketplace.canva.com/EAFtd8e9grU/1/0/1600w/canva-krem-dan-coklat-modern-elegan-sertifikat-penghargaan-nP83-0IaVzU.jpg',
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          AnimatedOpacity(
-            opacity: _isHovering ? 1.0 : 0.0,
-            duration: const Duration(milliseconds: 200),
-            child: Container(
-              height: 200,
-              width: 250,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                color: Colors.black.withOpacity(0.7),
-              ),
-              child: const Padding(
-                padding: EdgeInsets.all(16.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      'aaaaaa',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                    SizedBox(height: 8),
-                    Text(
-                      '12311',
-                      style: TextStyle(
-                        color: Colors.white70,
-                        fontSize: 14,
-                      ),
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: () => _showPhotoViewDialog(context),
+        child: Hero(
+          tag: widget.index,
+          child: Stack(
+            children: [
+              Container(
+                height: 200,
+                width: 250,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.1),
+                      blurRadius: 10,
+                      spreadRadius: 2,
                     ),
                   ],
                 ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(12),
+                  child: Image.asset(
+                    widget.sertifikatModel.image,
+                    fit: BoxFit.cover,
+                  ),
+                ),
               ),
-            ),
+              AnimatedOpacity(
+                opacity: _isHovering ? 1.0 : 0.0,
+                duration: const Duration(milliseconds: 200),
+                child: Container(
+                  height: 200,
+                  width: 250,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    color: Colors.black.withOpacity(0.7),
+                  ),
+                ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
