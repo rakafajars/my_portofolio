@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:my_portofolio/constant/launch_url_const.dart';
 import 'package:my_portofolio/model/contact_model.dart';
 import 'package:my_portofolio/theme/font_style_theme.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class MobileFooterSection extends StatelessWidget {
   const MobileFooterSection({super.key});
@@ -90,12 +89,6 @@ class MobileContactItem extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-
-  void _launchURL(String url) async {
-    await launchUrl(
-      Uri.parse(url),
     );
   }
 }
