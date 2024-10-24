@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:my_portofolio/constant/color_const.dart';
-import 'package:my_portofolio/constant/gradient_filled_button_const.dart';
-import 'package:my_portofolio/constant/gradient_text_const.dart';
-import 'package:my_portofolio/gen/assets.gen.dart';
 import 'package:my_portofolio/theme/font_style_theme.dart';
+import 'package:my_portofolio/widget/button_download_cv.dart';
+import 'package:my_portofolio/widget/image_circle_widget.dart';
+import 'package:my_portofolio/widget/name_job_widget.dart';
+import 'package:my_portofolio/widget/name_widget.dart';
 
 class WebHomeSection extends StatelessWidget {
   const WebHomeSection({super.key});
@@ -24,29 +24,12 @@ class WebHomeSection extends StatelessWidget {
                     'Hi I’m',
                     style: FontStyleTheme.subheadingStyle,
                   ),
-                  GradientTextConst(
-                    text: 'Raka Fajar Salinggih',
-                    style: FontStyleTheme.headingStyle,
-                    gradient: LinearGradient(
-                      colors: ColorConst.pinkGradient,
-                    ),
-                  ),
-                  GradientTextConst(
-                    text: 'Flutter Developer',
-                    style: FontStyleTheme.headingStyle,
-                    gradient: LinearGradient(
-                      colors: ColorConst.pinkGradient,
-                    ),
-                  )
+                  const NameWidget(),
+                  const NameJobWidget()
                 ],
               ),
             ),
-            CircleAvatar(
-              radius: 100,
-              backgroundImage: AssetImage(
-                MyAssets.images.avatar.path,
-              ),
-            ),
+            const ImageCircleWidget(),
           ],
         ),
         const SizedBox(height: 24),
@@ -68,10 +51,7 @@ class WebHomeSection extends StatelessWidget {
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 16),
-        GradientFilledButton(
-          onPressed: () {},
-          text: 'Download CV',
-        ),
+        const ButtonDownloadCvWidget(),
         const SizedBox(height: 16),
       ],
     );

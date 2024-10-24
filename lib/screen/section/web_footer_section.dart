@@ -1,31 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:my_portofolio/constant/launch_url_const.dart';
 import 'package:my_portofolio/model/contact_model.dart';
 import 'package:my_portofolio/theme/font_style_theme.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class WebFooterSection extends StatelessWidget {
-  WebFooterSection({super.key});
-
-  final List<ContactModel> contacts = [
-    ContactModel(
-      title: 'Email',
-      value: 'rakafajar18@gmail.com',
-      icon: Icons.email_outlined,
-      url: 'mailto:rakafajar18@gmail.com',
-    ),
-    ContactModel(
-      title: 'LinkedIn',
-      value: 'linkedin.com/in/rakafajars',
-      icon: Icons.link,
-      url: 'https://www.linkedin.com/in/rakafajars/',
-    ),
-    ContactModel(
-      title: 'GitHub',
-      value: 'github.com/rakafajars',
-      icon: Icons.code,
-      url: 'https://github.com/rakafajars',
-    ),
-  ];
+  const WebFooterSection({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +49,7 @@ class ContactItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => _launchURL(info.url),
+      onTap: () => LaunchUrlConst.launchURLConst(info.url),
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
@@ -107,14 +86,6 @@ class ContactItem extends StatelessWidget {
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  void _launchURL(String url) async {
-    await launchUrl(
-      Uri.parse(
-        url,
       ),
     );
   }

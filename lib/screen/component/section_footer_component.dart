@@ -10,7 +10,7 @@ class SectionFooterComponent extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         if (constraints.maxWidth > 600) {
-          return WebFooterSection();
+          return const WebFooterSection();
         } else {
           return const MobileFooterSection();
         }
