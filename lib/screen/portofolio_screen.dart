@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_portofolio/constant/color_const.dart';
 import 'package:my_portofolio/constant/nav_item_const.dart';
 import 'package:my_portofolio/screen/component/section_experience_component.dart';
+import 'package:my_portofolio/screen/component/section_footer_component.dart';
 import 'package:my_portofolio/screen/component/section_home_component.dart';
 import 'package:my_portofolio/screen/component/section_sertification_component.dart';
 import 'package:my_portofolio/screen/component/section_skill_component.dart';
@@ -17,46 +18,106 @@ class PortofolioScreen extends StatefulWidget {
 class _PortofolioScreenState extends State<PortofolioScreen> {
   int _activeIndex = 0;
   late List<NavItem> navItems;
+  final ScrollController _scrollController = ScrollController();
+  final List<GlobalKey> _sectionKeys = List.generate(3, (index) => GlobalKey());
+  bool _isScrolling = false;
 
   void _initializeNavItems() {
     navItems = [
       NavItem(
         title: 'Home',
-        onTap: () => selectedIndex(0),
+        onTap: () => scrollToSection(0),
         isActive: _activeIndex == 0,
       ),
       NavItem(
         title: 'Experience',
-        onTap: () => selectedIndex(1),
+        onTap: () => scrollToSection(1),
         isActive: _activeIndex == 1,
       ),
       NavItem(
         title: 'Sertification',
-        onTap: () => selectedIndex(2),
+        onTap: () => scrollToSection(2),
         isActive: _activeIndex == 2,
       ),
-      // NavItem(
-      //   title: 'About',
-      //   onTap: () {},
-      //   isActive: _activeIndex == 3,
-      // ),
-      // NavItem(
-      //   title: 'Contact',
-      //   onTap: () {},
-      //   isActive: _activeIndex == 4,
-      // ),
     ];
   }
 
-  void selectedIndex(int index) {
-    _activeIndex = index;
-    setState(() {});
+  void scrollToSection(int index) async {
+    if (_isScrolling) return;
+    _isScrolling = true;
+
+    // Update state immediately
+    setState(() {
+      _activeIndex = index;
+    });
+
+    try {
+      if (index == 0) {
+        await _scrollController.animateTo(
+          0,
+          duration: const Duration(milliseconds: 500),
+          curve: Curves.easeInOut,
+        );
+      } else {
+        final context = _sectionKeys[index].currentContext;
+        if (context != null) {
+          await Scrollable.ensureVisible(
+            context,
+            duration: const Duration(milliseconds: 500),
+            curve: Curves.easeInOut,
+          );
+        }
+      }
+    } finally {
+      _isScrolling = false;
+    }
+  }
+
+  void _handleScroll() {
+    if (!_scrollController.hasClients || _isScrolling) return;
+
+    // Check if we're at the top
+    if (_scrollController.offset <= 50) {
+      if (_activeIndex != 0) {
+        setState(() {
+          _activeIndex = 0;
+        });
+      }
+      return;
+    }
+
+    // Find visible section for other sections
+    for (int i = 1; i < _sectionKeys.length; i++) {
+      final context = _sectionKeys[i].currentContext;
+      if (context != null) {
+        final RenderBox box = context.findRenderObject() as RenderBox;
+        final position = box.localToGlobal(Offset.zero);
+        final threshold = MediaQuery.of(context).size.height * 0.3;
+
+        if (position.dy >= 0 && position.dy <= threshold && _activeIndex != i) {
+          setState(() {
+            _activeIndex = i;
+          });
+          break;
+        }
+      }
+    }
   }
 
   @override
   void initState() {
     super.initState();
     _initializeNavItems();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _scrollController.addListener(_handleScroll);
+    });
+  }
+
+  @override
+  void dispose() {
+    _scrollController.removeListener(_handleScroll);
+    _scrollController.dispose();
+    super.dispose();
   }
 
   @override
@@ -70,35 +131,23 @@ class _PortofolioScreenState extends State<PortofolioScreen> {
           currentItem: navItems[_activeIndex],
         ),
       ),
-      drawer: MediaQuery.of(context).size.width <= 600
-          ? ResponsiveNavigationWidget(
-              items: navItems,
-              currentItem: navItems[_activeIndex],
-            )
-          : null,
-      body: ListView(
-        padding: const EdgeInsets.only(
-          top: 16,
-        ),
-        children: [
-          if (_activeIndex == 0) ...[
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.only(top: 24),
+        controller: _scrollController,
+        child: Column(
+          children: [
             Padding(
               padding: EdgeInsets.symmetric(
                 horizontal: MediaQuery.of(context).size.width <= 600 ? 0 : 120,
               ),
-              child: const SectionHomeComponent(),
+              child: SectionHomeComponent(key: _sectionKeys[0]),
             ),
             const SectionSkillComponent(),
-          ] else if (_activeIndex == 1) ...[
-            const SectionExperienceComponent(),
-          ] else if (_activeIndex == 2) ...[
-            const SectionSertificationComponent(),
+            SectionExperienceComponent(key: _sectionKeys[1]),
+            SectionSertificationComponent(key: _sectionKeys[2]),
+            const SectionFooterComponent(),
           ],
-
-          // const SectionEducationComponent(),
-          // const SectionSertificationComponent(),
-          // const SectionFooterComponent(),
-        ],
+        ),
       ),
     );
   }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:my_portofolio/constant/nav_item_const.dart';
-import 'package:my_portofolio/widget/mobile_header_widget.dart';
 import 'package:my_portofolio/widget/web_header_widget.dart';
 
 class ResponsiveNavigationWidget extends StatelessWidget {
@@ -25,9 +24,7 @@ class ResponsiveNavigationWidget extends StatelessWidget {
             currentItem: currentItem,
           );
         } else {
-          return const MobileHeaderWidget(
-            title: title,
-          );
+          return const SizedBox();
         }
       },
     );

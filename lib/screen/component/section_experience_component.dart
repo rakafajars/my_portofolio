@@ -11,7 +11,7 @@ class SectionExperienceComponent extends StatelessWidget {
         if (constraints.maxWidth > 600) {
           return const WebExperienceSection();
         } else {
-          return const SizedBox();
+          return const WebExperienceSection();
         }
       },
     );
